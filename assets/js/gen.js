@@ -7,11 +7,13 @@ function generateQuestions(data, category, module) {
         if (questionData.ilustracja != '') {
             entry += '<p class="image"><img class="ilustration" src="../ilustracje/' + questionData.ilustracja + '"></p>'
         }
-        entry += '<ol type="a"><li>' + questionData.odpa + '</li><li>' + questionData.odpb + '</li><li>' + questionData.odpc + '</li></ol>'
+        entry += '<ol type="a">'
+        entry += '<li class="' + ((questionData.odp == 'a') ? "poprawna": "niepoprawna") +'" >' + questionData.odpa + '</li>'
+        entry += '<li class="' + ((questionData.odp == 'b') ? "poprawna": "niepoprawna") +'" >' + questionData.odpb + '</li>'
+        entry += '<li class="' + ((questionData.odp == 'c') ? "poprawna": "niepoprawna") +'" >' + questionData.odpc + '</li>'
+        entry += '</ol>'
         entry += '<hr></div></div></div>'
 
         d3.select("#questions").insert("article").attr("class", "post").html(entry);
-
     }
-
 }
