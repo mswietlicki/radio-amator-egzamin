@@ -10,7 +10,7 @@ W przypadku pytań na kategorię A:
 
 Zbiór pytań na kategorię C jest podzbiorem pytań na kategorię A. 
 
-Pytania najwygodniej przeglądać poprzez stronę pod adresem: https://hackerspacekrk.github.io/pytania-egzaminacyjne/
+Pytania najwygodniej przeglądać poprzez stronę pod adresem: https://mswietlicki.github.io/radio-amator-egzamin/
 
 Konstruktywne i merytoryczne uwagi można zgłaszać poprzez githubowe issues, pull request lub ewentualnie mailem na radio@hackerspace-krk.pl.
 

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,111 +11,116 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="../assets/css/main.css">
     <meta property="og:image" content="../assets/img/screen.png">
-    <meta property="og:description" content="Proponowane zaktualizowane pytania egzaminacyjne do egzaminu na świadectwo operatora urządzeń radiowych w służbie radiokomunikacyjnej amatorskiej">
+    <meta property="og:description"
+        content="Proponowane zaktualizowane pytania egzaminacyjne do egzaminu na świadectwo operatora urządzeń radiowych w służbie radiokomunikacyjnej amatorskiej">
 </head>
 
 <body>
 
 
-<section class="hero is-info is-medium is-bold">
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <h1 class="title">Klasa A - dział 4 - PRZEPISY DOTYCZĄCE RADIOKOMUNIKACYJNEJ SŁUŻBY AMATORSKIEJ</h1>
+    <section class="hero is-info is-medium is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">Klasa A - dział 4 - PRZEPISY DOTYCZĄCE RADIOKOMUNIKACYJNEJ SŁUŻBY AMATORSKIEJ</h1>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<nav class="navbar">
-    <div class="container">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="../index.html">
-                Pytania egzaminacyjne
-            </a>
-            <span class="navbar-burger burger" data-target="navbarMenu">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="../index.html">
+                    Pytania egzaminacyjne
+                </a>
+                <span class="navbar-burger burger" data-target="navbarMenu">
                     <span></span>
                     <span></span>
                     <span></span>
                 </span>
-        </div>
-        <div id="navbarMenu" class="navbar-menu">
-            <div class="navbar-end">
-                <a class="navbar-item is-active" href="../index.html">
-                    Strona główna
-                </a>
-                <a class="navbar-item is-active" href="https://github.com/HackerspaceKRK/pytania-egzaminacyjne">
-                    Repozytorium z pytaniami
-                </a>
-                                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        Klasa A
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item is-active" href="../index.html">
+                        Strona główna
                     </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item" href="1.html">
-                            Dział 1 - Radiotechnika
+                    <a class="navbar-item is-active" href="https://github.com/mswietlicki/radio-amator-egzamin">
+                        Repozytorium z pytaniami
+                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Klasa A
                         </a>
-                        <a class="navbar-item" href="2.html">
-                            Dział 2 - BHP
-                        </a>
-                        <a class="navbar-item" href="3.html">
-                            Dział 3 - Procedury i zwyczaje operatorskie
-                        </a>
-                        <a class="navbar-item" href="4.html">
-                            Dział 4 - Przepisy dotyczące radiokomunikacyjnej służby amatorskiej
-                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="1.html">
+                                Dział 1 - Radiotechnika
+                            </a>
+                            <a class="navbar-item" href="2.html">
+                                Dział 2 - BHP
+                            </a>
+                            <a class="navbar-item" href="3.html">
+                                Dział 3 - Procedury i zwyczaje operatorskie
+                            </a>
+                            <a class="navbar-item" href="4.html">
+                                Dział 4 - Przepisy dotyczące radiokomunikacyjnej służby amatorskiej
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        Klasa C
-                    </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item" href="../kat_c/1.html">
-                            Dział 1 - Radiotechnika
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Klasa C
                         </a>
-                        <a class="navbar-item" href="../kat_c/2.html">
-                            Dział 2 - BHP
-                        </a>
-                        <a class="navbar-item" href="../kat_c/3.html">
-                            Dział 3 - Procedury i zwyczaje operatorskie
-                        </a>
-                        <a class="navbar-item" href="../kat_c/4.html">
-                            Dział 4 - Przepisy dotyczące radiokomunikacyjnej służby amatorskiej
-                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="../kat_c/1.html">
+                                Dział 1 - Radiotechnika
+                            </a>
+                            <a class="navbar-item" href="../kat_c/2.html">
+                                Dział 2 - BHP
+                            </a>
+                            <a class="navbar-item" href="../kat_c/3.html">
+                                Dział 3 - Procedury i zwyczaje operatorskie
+                            </a>
+                            <a class="navbar-item" href="../kat_c/4.html">
+                                Dział 4 - Przepisy dotyczące radiokomunikacyjnej służby amatorskiej
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 
-<section class="container">
-    <div class="box content" id="questions"></div>
-</section>
+    <section class="container">
+        <div class="box content" id="questions"></div>
+    </section>
 
-<script>
-    Promise.all([
-        d3.csv("dzial4a.csv"),
-    ]).then(function (data) {
-        generateQuestions(data, "A", "4")
-    }).then(function(){
-        if(window.location.hash) {
+    <script>
+        Promise.all([
+            d3.csv("dzial4a.csv"),
+        ]).then(function (data) {
+            generateQuestions(data, "A", "4")
+        }).then(function () {
+            if (window.location.hash) {
 
-            var anchor = document.querySelector(window.location.hash);
-            anchor.scrollIntoView({behavior: 'smooth', block: 'center'});
-        }
-    });
-</script>
-
-        <script async type="text/javascript" src="../assets/js/bulma.js"></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/js/OverlayScrollbars.min.js'></script>
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        //The first argument are the elements to which the plugin shall be initialized
-        //The second argument has to be at least a empty object or a object with your desired options
-        OverlayScrollbars(document.querySelectorAll("body"), { });
+                var anchor = document.querySelector(window.location.hash);
+                anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         });
-        </script></body>
+    </script>
+
+    <script async type="text/javascript" src="../assets/js/bulma.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/js/OverlayScrollbars.min.js'></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            //The first argument are the elements to which the plugin shall be initialized
+            //The second argument has to be at least a empty object or a object with your desired options
+            OverlayScrollbars(document.querySelectorAll("body"), {});
+        });
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+</body>
 
 </html>
