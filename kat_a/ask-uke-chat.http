@@ -1,0 +1,109 @@
+POST https://api.openai.com/v1/threads
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+{
+    "messages": [{"role": "user", "content": "Który z poniższych materiałów jest dobrym izolatorem elektrycznym?\na. szkło\nb. grafit\nc. krzem"}]
+}
+
+GET https://api.openai.com/v1/threads/thread_AF9ZuCxbWAstbYdWwjL80eKv/messages?limit=3
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+
+POST https://api.openai.com/v1/threads/thread_AF9ZuCxbWAstbYdWwjL80eKv/messages
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+{
+    "role": "user", 
+    "content": "Co oznacza wg kodu Q symbol QSY?\na. przejdź na częstotliwość, zmień częstotliwość\nb. do usłyszenia na innej częstotliwości\nc. mam uszkodzoną antenę"
+}
+
+
+POST https://api.openai.com/v1/threads/thread_AF9ZuCxbWAstbYdWwjL80eKv/messages
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+{
+    "role": "user", 
+    "content": "Przez kondensator o impedancji 10 Ω płynie prąd przemienny o częstotliwości 50Hz i wartości 2A. Jaki będzie spadek napięcia na kondensatorze?\na. 10V\nb. 50V\nc. 20V"
+}
+
+POST https://api.openai.com/v1/threads/thread_AF9ZuCxbWAstbYdWwjL80eKv/messages
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+{
+    "role": "user", 
+    "content": "Rezystor ma wartość 200 Ω. Płynie przez niego prąd 300 mA. Jaka moc wydziela się na rezystorze?\na. 18 W\nb. 1800 W\nc. 1,8 W"
+}
+msg_QMpHKHAZ6iJUMh7EA1mtBagK
+
+
+POST https://api.openai.com/v1/threads/runs
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+{
+    "assistant_id": "asst_ZOAt9skmml9OsvboIXAz9O5j",
+    "thread": {
+        "messages": [
+            {
+                "role": "user", 
+                "content": "Rezystor ma wartość 200 Ω. Płynie przez niego prąd 300 mA. Jaka moc wydziela się na rezystorze?\na. 18 W\nb. 1800 W\nc. 1,8 W"
+            }
+        ]
+    }
+}
+run_WPF378IXXb5u1EDd9iimCMjk
+thread_DKajFjB1SsUmPM3iph1ZyZ8I
+
+
+GET https://api.openai.com/v1/threads/thread_Ko7w3HdqKVMVQ58tLLxa9BXV/runs/run_Gimz0HOYhbCrSo24qpeR5Ztz
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+GET https://api.openai.com/v1/threads/thread_Ko7w3HdqKVMVQ58tLLxa9BXV/runs/run_Gimz0HOYhbCrSo24qpeR5Ztz/steps
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+
+GET https://api.openai.com/v1/threads/thread_Ko7w3HdqKVMVQ58tLLxa9BXV/messages
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+
+POST https://api.openai.com/v1/threads/thread_AF9ZuCxbWAstbYdWwjL80eKv/runs
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1
+
+{
+    "assistant_id": "asst_ZOAt9skmml9OsvboIXAz9O5j"
+}
+
+GET https://api.openai.com/v1/threads/thread_OhWtLimGKBJpmljwFA5N9ZzL/runs
+Content-Type: application/json
+Authorization: Bearer 
+OpenAI-Organization: org-wijfaw2KuUZK0s5zz21s62yQ
+OpenAI-Beta: assistants=v1

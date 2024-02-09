@@ -12,6 +12,7 @@ function generateQuestions(data, category, module) {
         entry += '<li class="' + ((questionData.odp == 'b') ? "poprawna": "niepoprawna") +'" >' + questionData.odpb + '</li>'
         entry += '<li class="' + ((questionData.odp == 'c') ? "poprawna": "niepoprawna") +'" >' + questionData.odpc + '</li>'
         entry += '</ol>'
+        entry += '<p><strong>Uzasadnienie:</strong></p><div class="uzasadnienie">' + questionData.uzasadnienie + '</div>'
         entry += '<hr></div></div></div>'
 
         d3.select("#questions").insert("article").attr("class", "post").html(entry);

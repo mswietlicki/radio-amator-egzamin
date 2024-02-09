@@ -26,6 +26,9 @@ html,body {
     color: red;
 }
 
+.uzasadnienie {
+    color: slategray;
+}
 @media (min-width:769px) {
     .ilustration {
         width:50% !important;
@@ -34,4 +37,8 @@ html,body {
 
 #questions {
     margin: 0.75rem;
+}
+
+mjx-container {
+    text-align: left !important;
 }

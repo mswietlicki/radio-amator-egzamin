@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.CommandLine;
 using System.Diagnostics;
 using System.Globalization;
@@ -6,6 +7,7 @@ using System.Text;
 using Azure.AI.OpenAI.Assistants;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Markdig;
 
 Console.WriteLine("Hi there!");
 Console.WriteLine("This is a client that will ask custom ChatGPT assistant to answer examination questions.");
@@ -50,7 +52,9 @@ rootCommand.SetHandler(async (context) =>
     Console.WriteLine($"Assistant: {assistant.Name}");
     Console.WriteLine();
 
-    foreach (var question in questions.Where(q => string.IsNullOrEmpty(q.uzasadnienie)).Take(1))
+    foreach (var question in questions
+        .Where(q => string.IsNullOrEmpty(q.ilustracja))
+        .Where(q => string.IsNullOrEmpty(q.uzasadnienie)))
     {
         Console.WriteLine("------------------------------------------------------------------------------------------");
         var query = $"{question.pytanie}\na. {question.odpa}\nb. {question.odpb}\nc. {question.odpc}";
@@ -68,30 +72,83 @@ rootCommand.SetHandler(async (context) =>
                 }
             })).Value;
 
-        Debug.WriteLine($"Created thread: {threadRun.ThreadId} run: {threadRun.Id} status: {threadRun.Status}");
+        Console.Write($"----- Created thread: {threadRun.ThreadId} run: {threadRun.Id} ");
 
         var run = (await client.GetRunAsync(threadRun.ThreadId, threadRun.Id)).Value;
         while (run.Status == RunStatus.Queued || run.Status == RunStatus.InProgress)
         {
-            Debug.WriteLine($"Run: {run.Id} status: {run.Status}. Waiting...");
+            Console.Write(".");
             await Task.Delay(TimeSpan.FromMilliseconds(1000));
             run = (await client.GetRunAsync(threadRun.ThreadId, threadRun.Id)).Value;
         }
+        Console.WriteLine(" -----");
 
-        var messages = (await client.GetMessagesAsync(threadRun.ThreadId)).Value;
+        if(run.Status != RunStatus.Completed)
+        {
+            Console.WriteLine($"Run failed with status {run.Status}: {run.LastError.Message} Skipping.");
+            continue;
+        }
+
+        var messages = (await client.GetMessagesAsync(run.ThreadId)).Value;
         var assistantMessages = messages.Where(m => m.Role == MessageRole.Assistant).ToList();
 
-        var answer = new StringBuilder();
+        var answers = new List<Answer>();
+
         foreach (var message in assistantMessages)
         {
-            answer.AppendLine(message.ContentItems.Where(c => c is MessageTextContent).Cast<MessageTextContent>().First().Text);
+            answers.Add(new Answer
+            {
+                Text = message.ContentItems.Where(c => c is MessageTextContent).Cast<MessageTextContent>().First().Text,
+                CreateAt = message.CreatedAt
+            });
         }
+
+        var steps = (await client.GetRunStepsAsync(run.ThreadId, run.Id)).Value;
+        foreach (var step in steps.Where(s => s.Type == RunStepType.ToolCalls))
+        {
+            var details = step.StepDetails as RunStepToolCallDetails;
+            if (details is not null)
+            {
+                foreach (var call in details.ToolCalls.Where(s => s is RunStepCodeInterpreterToolCall).Cast<RunStepCodeInterpreterToolCall>())
+                {
+                    var text = new StringBuilder();
+                    text.AppendLine();
+                    text.AppendLine("```python");
+                    text.AppendLine(call.Input.Trim().Replace("\n", "-line-break-"));
+                    text.AppendLine("```");
+                    text.AppendLine();
+                    text.AppendLine("```python");
+                    text.AppendLine(call.Outputs.Aggregate(
+                        new StringBuilder(),
+                        (sb, o) => sb.AppendLine(((RunStepCodeInterpreterLogOutput)o).Logs)).ToString().Trim());
+                    text.AppendLine("```");
+
+                    answers.Add(new Answer
+                    {
+                        Text = text.ToString(),
+                        CreateAt = step.CreatedAt
+                    });
+                }
+            }
+        }
+
+        var answer = answers.OrderBy(a => a.CreateAt).Aggregate(new StringBuilder(), (sb, a) => sb.AppendLine(a.Text));
+        answer = answer
+            .Replace(@"\,", @"\\\,")
+            .Replace(@"\[", @"\\\[")
+            .Replace(@"\]", @"\\\]")
+            .Replace(@"\(", @"\\\(")
+            .Replace(@"\)", @"\\\)");
 
         Console.WriteLine(answer.ToString());
 
-        question.uzasadnienie = answer.ToString();
+        question.uzasadnienie = Markdown.ToHtml(answer.ToString()).Trim()
+            .Replace("-line-break-", "<br />")
+            .Replace("\r\n", " ")
+            .Replace("\n", " ")
+            .Replace("\r", " ");
 
-        using (var writer = new StreamWriter("questions.csv", false))
+        using (var writer = new StreamWriter(questionsFile.FullName, false))
         using (var csv = new CsvWriter(writer, configuration))
         {
             csv.WriteRecords(questions);
@@ -110,6 +167,12 @@ rootCommand.SetHandler(async (context) =>
 });
 
 return await rootCommand.InvokeAsync(args);
+
+class Answer
+{
+    public string Text { get; set; }
+    public DateTimeOffset CreateAt { get; set; }
+}
 
 class Question
 {

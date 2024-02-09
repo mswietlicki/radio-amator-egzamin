@@ -1,0 +1,1 @@
+dotnet run -- --questionsFile ..\..\kat_a\dzial1a.csv
