@@ -39,6 +39,7 @@ rootCommand.SetHandler(async (context) =>
     {
         Delimiter = ",",
         HasHeaderRecord = true,
+        
     };
     using (var reader = new StreamReader(questionsFile.FullName))
     using (var csv = new CsvReader(reader, configuration))
@@ -61,7 +62,7 @@ rootCommand.SetHandler(async (context) =>
         Console.WriteLine(query);
         Console.WriteLine();
 
-        var threadRun = (await client.CreateThreadAndRunAsync(
+        var run = (await client.CreateThreadAndRunAsync(
             new CreateAndRunThreadOptions(assistant.Id)
             {
                 Thread = new AssistantThreadCreationOptions
@@ -72,20 +73,32 @@ rootCommand.SetHandler(async (context) =>
                 }
             })).Value;
 
-        Console.Write($"----- Created thread: {threadRun.ThreadId} run: {threadRun.Id} ");
+        Console.Write($"----- Created thread: {run.ThreadId} run: {run.Id} ");
 
-        var run = (await client.GetRunAsync(threadRun.ThreadId, threadRun.Id)).Value;
+        var timeout = DateTime.Now.AddMinutes(1);
         while (run.Status == RunStatus.Queued || run.Status == RunStatus.InProgress)
         {
+            if (DateTime.Now > timeout)
+            {
+                var tSteps = (await client.GetRunStepsAsync(run.ThreadId, run.Id)).Value;
+                if(tSteps.Any(s => s.Status == RunStepStatus.Failed))
+                {
+                    var step = tSteps.First(s => s.Status == RunStepStatus.Failed);
+                    Console.WriteLine($"Run step {step.Id} ({step.Type}) failed. Cancelling run.");  
+                    run = (await client.CancelRunAsync(run.ThreadId, run.Id)).Value;
+                    break;
+                }
+                timeout = DateTime.Now.AddMinutes(1);
+            }
             Console.Write(".");
-            await Task.Delay(TimeSpan.FromMilliseconds(1000));
-            run = (await client.GetRunAsync(threadRun.ThreadId, threadRun.Id)).Value;
+            await Task.Delay(TimeSpan.FromMilliseconds(5000));
+            run = (await client.GetRunAsync(run.ThreadId, run.Id)).Value;
         }
         Console.WriteLine(" -----");
 
         if(run.Status != RunStatus.Completed)
         {
-            Console.WriteLine($"Run failed with status {run.Status}: {run.LastError.Message} Skipping.");
+            Console.WriteLine($"Run failed with status {run.Status}: {run.LastError?.Message} Skipping.");
             continue;
         }
 
@@ -142,6 +155,7 @@ rootCommand.SetHandler(async (context) =>
 
         Console.WriteLine(answer.ToString());
 
+        question.model = assistant.Model;
         question.uzasadnienie = Markdown.ToHtml(answer.ToString()).Trim()
             .Replace("-line-break-", "<br />")
             .Replace("\r\n", " ")
@@ -184,4 +198,5 @@ class Question
     public string odpc { get; set; }
     public string odp { get; set; }
     public string uzasadnienie { get; set; }
+    public string model { get; set; }
 }
