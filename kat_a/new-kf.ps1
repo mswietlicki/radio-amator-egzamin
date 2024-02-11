@@ -1,0 +1,1 @@
+$file = ".\dzial1a.csv"; (Import-Csv $file) | % { $p = $_; $odp = (($kf | ? { $_.question -eq $p.pytanie }).answers | ? { $_.isCorrect -eq $true }); $p.odp = $odp.index; $p } | Export-Csv $file -UseQuotes AsNeeded
