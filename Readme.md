@@ -1,25 +1,27 @@
-# Pytania Egzaminacyjne #
+# Nowe pytania do egzaminu na świadectwo operatora urządzeń radiowych w służbie radiokomunikacyjnej amatorskiej z odpowiedziami
 
-W lipcu bieżącego roku z inicjatywy Jurka HF1D, do Urzędu Komunikacji Elektronicznej została przekazana propozycja nowej bazy pytań egzaminacyjnych stworzonych na kanwie bazy pytań do tej pory używanych. 
+Przygotowuje się do egzaminu na klasę A i pomyślałem, że przyda mi się zestaw pytań z odpowiedziami i wyjeśnieniami. Podobne jak można znaleźć dla "starych" pytań.
 
-W przypadku pytań na kategorię A:
-- 227 pytań nie wymagało żadnych zmian,
-- 80 pytań zostało przeredagowanych,
-- 114 pytań w opinii zespołu nie nadawało się do wykorzystania. 
-- do bazy dodano 218 nowych pytań tak, aby maksymalnie wypełnić zalecenia HAREC.
+Ponieważ nie znalazłem takie kompletnego zestawienia postanowiłem zrobić je samemu na bazie znalezionych materiałów i ChatGPT.
 
-Zbiór pytań na kategorię C jest podzbiorem pytań na kategorię A. 
+Podziękowania dla:
 
-Pytania najwygodniej przeglądać poprzez stronę pod adresem: https://mswietlicki.github.io/radio-amator-egzamin/
+- https://hackerspacekrk.github.io/pytania-egzaminacyjne/
+- https://radomirmazon.github.io/quebec/
+- https://github.com/rafal-dot/UKE-nowe-pytania
 
-Konstruktywne i merytoryczne uwagi można zgłaszać poprzez githubowe issues, pull request lub ewentualnie mailem na radio@hackerspace-krk.pl.
+Na bazie prac których przygotowałem moje zestawienie.
 
-# Zespół:
-- Szymon Reiter - SQ9ZAQ
-- Przemysław Sadowski - SQ9NJE
-- Radosław Froń - SQ8LHI
-- Tomasz Pabich - SP7Q
-- Marcin Marciniak - SP5XMI
-- Wojciech Bielak - SQ9PBS
-- Piotr Wilkoń - SQ8L
-- Paweł Hadam - SQ8F
+**UWAGA: Odpowiedzi na pytania NIE są oficjalne. Są pracą społeczności, moją lub ChatGPT i dla tego mogą nie być poprawne.**
+
+Praktycznie wszystkie analizy są także wygenerowane przez ChatGPT i szczególnie w dziale Prawnym są średniej jakości.
+
+Mam nadzieję, że zestawienie będzie użyteczne :)
+
+## Klasa A
+
+- [Dział 1 - RADIOTECHNIKA](./kat_a/1.html)
+- [Dział 2 - BHP](./kat_a/2.html)
+- [Dział 3 - PROCEDURY I ZWYCZAJE OPERATORSKIE](./kat_a/3.html)
+- [Dział 4 - PRZEPISY DOTYCZĄCE RADIOKOMUNIKACYJNEJ SŁUŻBY AMATORSKIEJ](./kat_a/4.html)
+
